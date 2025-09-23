@@ -1,11 +1,9 @@
 /* Éjszakai/Nappali mód váltás */
-const TB = document.getElementById("themebutton");
-const darkthemeIcon = document.getElementById("darkthemeIcon")
-const lightthemeIcon = document.getElementById("lightthemeIcon")
-const html = document.documentElement;
-
 function changeTheme() {
+    const html = document.documentElement;
     let th = html.getAttribute("data-bs-theme");
+    let darkthemeIcon = document.getElementById("darkthemeIcon")
+    let lightthemeIcon = document.getElementById("lightthemeIcon")
 
     if (th === "light") {
         html.setAttribute("data-bs-theme", 'dark')
