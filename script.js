@@ -16,7 +16,7 @@ function changeTheme() {
     }
 }
 
-function login() {
+function register() {
     let emailcim = document.getElementById("emailCim").value;
     let emailcheck = document.getElementById("emailError");
     let valid = true;
