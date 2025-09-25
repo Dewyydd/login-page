@@ -19,9 +19,11 @@ function changeTheme() {
 function login() {
     let emailcim = document.getElementById("emailCim").value;
     let emailcheck = document.getElementById("emailError");
+        let valid = true;
 
     if (!(emailcim.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/))) {
         emailcheck.classList.remove("d-none");
+        valid=false;
     } else {
         emailcheck.classList.add("d-none");
     }
@@ -31,6 +33,7 @@ function login() {
 
     if (username.length > 30 || username.length < 3) {
         usernameCheck.classList.remove("d-none");
+        valid=false;
     } else {
         usernameCheck.classList.add("d-none");
     }
@@ -39,9 +42,22 @@ function login() {
     let jelszo = document.getElementById("password").value;
 
     if (egyezes === jelszo) {
-        document.getElementById("passwordMegerositesLeiras").classList.remove("d-none");
-    } else {
         document.getElementById("passwordMegerositesLeiras").classList.add("d-none");
+    } else {
+        document.getElementById("passwordMegerositesLeiras").classList.remove("d-none");
+        valid=false;
+    }
+
+
+    if(valid){
+        const userData = {
+            email: emailcim,
+            username: username,
+            passowr: jelszo
+        };
+
+        localStorage.setItem("loggedInUser", JSON.stringify(userData));
+        window.location.href = "lockedin.html";
     }
 }
 
