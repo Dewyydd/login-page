@@ -19,13 +19,15 @@ function changeTheme() {
 function login() {
     let emailcim = document.getElementById("emailCim").value;
     let emailcheck = document.getElementById("emailError");
-        let valid = true;
+    let valid = true;
 
     if (!(emailcim.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/))) {
         emailcheck.classList.remove("d-none");
-        valid=false;
+        valid = false;
     } else {
-        emailcheck.classList.add("d-none");
+        if (!(emailcheck.classList.contains("d-none"))) {
+            emailcheck.classList.add("d-none");
+        }
     }
 
     let username = document.getElementById("felhasznaloNev").value;
@@ -33,74 +35,85 @@ function login() {
 
     if (username.length > 30 || username.length < 3) {
         usernameCheck.classList.remove("d-none");
-        valid=false;
-    } else {
-        usernameCheck.classList.add("d-none");
+        valid = false;
+    } 
+    else {
+        if (!(usernameCheck.classList.contains("d-none"))) {
+            usernameCheck.classList.add("d-none");
+        }
     }
 
     let egyezes = document.getElementById("passwordMegerosites").value;
     let jelszo = document.getElementById("password").value;
+    let passwordMegerositesLeiras = document.getElementById("passwordMegerositesLeiras");
 
-    if (egyezes === jelszo) {
-        document.getElementById("passwordMegerositesLeiras").classList.add("d-none");
+    if (egyezes === jelszo && jelszo.length >= 8) {
+        passwordMegerositesLeiras.classList.add("d-none");
+        if (!(passwordMegerositesLeiras.classList.contains("d-none"))) {
+            passwordMegerositesLeiras.classList.add("d-none");
+        }
     } else {
-        document.getElementById("passwordMegerositesLeiras").classList.remove("d-none");
-        valid=false;
+        passwordMegerositesLeiras.classList.remove("d-none");
+        valid = false;
     }
 
 
-    if(valid){
-        const userData = {
-            email: emailcim,
-            username: username,
-            passowr: jelszo
-        };
-
-        localStorage.setItem("loggedInUser", JSON.stringify(userData));
-        window.location.href = "lockedin.html";
+    if (valid) {
+        alert("Sikeres regisztráció!")
     }
 }
 
-/* Live jelszó ellenőrzés */
 function checkPassword() {
     let jelszo = document.getElementById("password").value;
     let progressbar = document.getElementById("progress1");
-    let score = 0;
+    let helyesJ = 0;
 
-    document.getElementById("lowercaseF").classList.remove("d-none");
+    let lowercaseF = document.getElementById("lowercaseF");
+    let uppercaseF = document.getElementById("uppercaseF");
+    let numberF = document.getElementById("numberF");
+    let specialF = document.getElementById("specialF");
+    let hosszF = document.getElementById("hosszF");
+
+    lowercaseF.classList.remove("d-none");
     if (/[a-z]/.test(jelszo)) {
-        score++;
-        document.getElementById("lowercaseF").classList.add("d-none");
+        helyesJ++;
+        lowercaseF.classList.add("d-none");
     }
 
-    document.getElementById("uppercaseF").classList.remove("d-none");
+    uppercaseF.classList.remove("d-none");
     if (/[A-Z]/.test(jelszo)) {
-        score++;
-        document.getElementById("uppercaseF").classList.add("d-none");
+        helyesJ++;
+        uppercaseF.classList.add("d-none");
     }
 
-    document.getElementById("numberF").classList.remove("d-none");
+    numberF.classList.remove("d-none");
     if (/[0-9]/.test(jelszo)) {
-        score++;
-        document.getElementById("numberF").classList.add("d-none");
+        helyesJ++;
+        numberF.classList.add("d-none");
     }
 
-    document.getElementById("specialF").classList.remove("d-none");
+    specialF.classList.remove("d-none");
     if (/[._%+!~$]/.test(jelszo)) {
-        score++;
-        document.getElementById("specialF").classList.add("d-none");
+        helyesJ++;
+        specialF.classList.add("d-none");
     }
 
-    let percent = (score / 4) * 100;
-    progressbar.style.width = percent + "%";
+    hosszF.classList.remove("d-none");
+    if (jelszo.length >= 8) {
+        helyesJ++;
+        hosszF.classList.add("d-none");
+    }
+
+    let szazalek = (helyesJ / 5) * 100;
+    progressbar.style.width = szazalek + "%";
 
     document.getElementById("passwordLeiras").classList.remove("d-none");
     progressbar.classList.remove("bg-danger", "bg-warning", "bg-success");
 
-    if (percent === 100) {
+    if (szazalek === 100) {
         document.getElementById("passwordLeiras").classList.add("d-none");
         progressbar.classList.add("bg-success");
-    } else if (percent >= 50) {
+    } else if (szazalek >= 50) {
         progressbar.classList.add("bg-warning");
     } else {
         progressbar.classList.add("bg-danger");

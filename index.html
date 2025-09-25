@@ -77,7 +77,7 @@
                                             placeholder="Felhasználónév" required>
                                     </div>
                                     <div id="usernameError" class="alert alert-danger d-none">
-                                        A felhasználónévnek minimum 3 karakternek kell lennie és maximum 30 karakter lehet!
+                                        A felhasználónév csak betűket és számokat tartalmazhat, valamint 3-nál több, 30-nál kevesebb karakterből kell álljon!
                                     </div>
                                 </div>
                                 <div class="mb-3">
@@ -97,6 +97,7 @@
                                             A jelszavadnak tartalmaznia kell a következőket:
                                         </div>
                                         <ul>
+                                            <li id="hosszF">Minimum 8 karakter</li>
                                             <li id="uppercaseF">Nagybetű</li>
                                             <li id="lowercaseF">Kisbetű</li>
                                             <li id="numberF">Szám</li>
