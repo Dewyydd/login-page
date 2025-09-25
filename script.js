@@ -16,6 +16,28 @@ function changeTheme() {
     }
 }
 
+function ugrasRegister() {
+    let registerOldal = document.getElementById("registerOldal");
+    let loginOldal = document.getElementById("loginOldal");
+
+    if (!(loginOldal.classList.contains("d-none"))) {
+        loginOldal.classList.add("d-none")
+    }
+
+    registerOldal.classList.remove("d-none")
+}
+
+function vissza() {
+    let registerOldal = document.getElementById("registerOldal");
+    let loginOldal = document.getElementById("loginOldal");
+
+    if (!(registerOldal.classList.contains("d-none"))) {
+        registerOldal.classList.add("d-none")
+    }
+
+    loginOldal.classList.remove("d-none")
+}
+
 function register() {
     let emailcim = document.getElementById("emailCim").value;
     let emailcheck = document.getElementById("emailError");
@@ -36,7 +58,7 @@ function register() {
     if (username.length > 30 || username.length < 3) {
         usernameCheck.classList.remove("d-none");
         valid = false;
-    } 
+    }
     else {
         if (!(usernameCheck.classList.contains("d-none"))) {
             usernameCheck.classList.add("d-none");
