@@ -55,10 +55,11 @@ function register() {
     let username = document.getElementById("felhasznaloNev").value;
     let usernameCheck = document.getElementById("usernameError");
 
-    if (username.length > 30 || username.length < 3) {
+    if (username.length > 30 || username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
         usernameCheck.classList.remove("d-none");
         valid = false;
     }
+
     else {
         if (!(usernameCheck.classList.contains("d-none"))) {
             usernameCheck.classList.add("d-none");
@@ -79,9 +80,36 @@ function register() {
         valid = false;
     }
 
+    let helyesJ = 0;
+
+    if (/[a-z]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (/[A-Z]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (/[0-9]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (/[._%+!~$]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (egyezes.length >= 8) {
+        helyesJ++;
+    }
+
+    if (helyesJ != 5) {
+        valid = false;
+    }
 
     if (valid) {
         alert("Sikeres regisztráció!")
+
+        vissza()
     }
 }
 
