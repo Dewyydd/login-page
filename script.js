@@ -43,7 +43,7 @@ function register() {
     let emailcheck = document.getElementById("emailError");
     let valid = true;
 
-    if (!(emailcim.match(/^[a-zA-Z0-9._%+-]+@gmail\.com$/))) {
+    if (!(emailcim.match(/^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,3}$/))) {
         emailcheck.classList.remove("d-none");
         valid = false;
     } else {
@@ -108,8 +108,6 @@ function register() {
 
     if (valid) {
         alert("Sikeres regisztráció!")
-
-        vissza()
     }
 }
 
@@ -123,32 +121,38 @@ function checkPassword() {
     let numberF = document.getElementById("numberF");
     let specialF = document.getElementById("specialF");
     let hosszF = document.getElementById("hosszF");
+    let passwordLeiras = document.getElementById("passwordLeiras")
 
+    passwordLeiras.classList.remove("d-none");
     lowercaseF.classList.remove("d-none");
+    uppercaseF.classList.remove("d-none");
+    numberF.classList.remove("d-none");
+    specialF.classList.remove("d-none");
+    hosszF.classList.remove("d-none");
+
     if (/[a-z]/.test(jelszo)) {
         helyesJ++;
         lowercaseF.classList.add("d-none");
     }
 
-    uppercaseF.classList.remove("d-none");
     if (/[A-Z]/.test(jelszo)) {
         helyesJ++;
         uppercaseF.classList.add("d-none");
     }
 
-    numberF.classList.remove("d-none");
+
     if (/[0-9]/.test(jelszo)) {
         helyesJ++;
         numberF.classList.add("d-none");
     }
 
-    specialF.classList.remove("d-none");
+
     if (/[._%+!~$]/.test(jelszo)) {
         helyesJ++;
         specialF.classList.add("d-none");
     }
 
-    hosszF.classList.remove("d-none");
+
     if (jelszo.length >= 8) {
         helyesJ++;
         hosszF.classList.add("d-none");
@@ -157,15 +161,17 @@ function checkPassword() {
     let szazalek = (helyesJ / 5) * 100;
     progressbar.style.width = szazalek + "%";
 
-    document.getElementById("passwordLeiras").classList.remove("d-none");
     progressbar.classList.remove("bg-danger", "bg-warning", "bg-success");
 
     if (szazalek === 100) {
-        document.getElementById("passwordLeiras").classList.add("d-none");
+        passwordLeiras.classList.add("d-none");
         progressbar.classList.add("bg-success");
-    } else if (szazalek >= 50) {
+    }
+
+    else if (szazalek >= 50) {
         progressbar.classList.add("bg-warning");
-    } else {
+    }
+    else {
         progressbar.classList.add("bg-danger");
     }
 }
