@@ -1,4 +1,3 @@
-
 function changeTheme() {
     const html = document.documentElement;
     let th = html.getAttribute("data-bs-theme");
@@ -42,6 +41,17 @@ function register() {
     let emailcim = document.getElementById("emailCim").value;
     let emailcheck = document.getElementById("emailError");
     let valid = true;
+
+    let foglaltEmail = document.getElementById("emailFoglalt");
+    let foglaltUsername = document.getElementById("usernameFoglalt");
+
+    if (!(foglaltEmail.classList.contains("d-none"))) {
+        foglaltEmail.classList.add("d-none");
+    }
+
+    if (!(foglaltUsername.classList.contains("d-none"))) {
+        foglaltUsername.classList.add("d-none");
+    }
 
     if (!(emailcim.match(/^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,3}$/))) {
         emailcheck.classList.remove("d-none");
@@ -107,7 +117,18 @@ function register() {
     }
 
     if (valid) {
-        alert("Sikeres regisztráció!")
+        if (localStorageRegisterCheck(username, emailcim, jelszo) === "BEmail") {
+            foglaltEmail.classList.remove("d-none")
+        }
+
+        else if (localStorageRegisterCheck(username, emailcim, jelszo) === "BFhsz") {
+            foglaltUsername.classList.remove("d-none")
+        }
+
+        else {
+            alert("Sikeres regisztráció!")
+            location.reload();
+        }
     }
 }
 
@@ -173,5 +194,83 @@ function checkPassword() {
     }
     else {
         progressbar.classList.add("bg-danger");
+    }
+}
+
+
+function localStorageRegisterCheck(fhsznev, email, jelszo) {
+    const userKey = email + ";" + fhsznev;
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+    for (const k in users) {
+        let mentettEmail = k.split(';')[0];
+        let mentettFhsz = k.split(';')[1];
+
+        if (mentettEmail === email) {
+            return "BEmail"
+            break;
+        }
+
+        if (mentettFhsz === fhsznev) {
+            return "BFhsz"
+            break;
+        }
+    }
+
+    users[userKey] = jelszo;
+    localStorage.setItem('users', JSON.stringify(users));
+}
+
+function login() {
+    const emailjelszoegyezes = document.getElementById("emailjelszoegyezes");
+    const loginEmail = document.getElementById("loginEmail").value;
+    const loginPassword = document.getElementById("loginPassword").value;
+
+    if (!(emailjelszoegyezes.classList.contains("d-none"))) {
+        emailjelszoegyezes.classList.add("d-none");
+    }
+
+    const users = JSON.parse(localStorage.getItem('users'));
+
+    for (const k in users) {
+        let mentettEmail = k.split(';')[0];
+        let mentettFhsz = k.split(';')[1];
+        let jelszo = users[k];
+
+        if ((mentettEmail == loginEmail || mentettFhsz == loginEmail) && jelszo == loginPassword) {
+            let cred = mentettEmail + ";" + mentettFhsz + ";" + jelszo;
+            localStorage.setItem("loggedInUser", cred);
+            location.reload();
+        }
+
+        else {
+            emailjelszoegyezes.classList.remove("d-none");
+        }
+    }
+}
+
+function logout() {
+    localStorage.removeItem("loggedInUser");
+    location.reload();
+}
+
+function loggedInUserCheck() {
+    const LIU = localStorage.getItem("loggedInUser");
+    const loginOldal = document.getElementById("loginOldal"); 
+    const loggedInOldal = document.getElementById("loggedInOldal");
+
+    let loggedInEmail = document.getElementById("loggedInEmail"); 
+    let loggedInUsername = document.getElementById("loggedInUsername"); 
+    let loggedInPassword = document.getElementById("loggedInPassword"); 
+
+    if (LIU != null) {
+        loggedInOldal.classList.remove("d-none")
+        loginOldal.classList.add("d-none")
+
+        let cred = LIU.split(";");
+
+        loggedInEmail.value = cred[0];
+        loggedInUsername.value = cred[1];
+        loggedInPassword.value = cred[3];
     }
 }
