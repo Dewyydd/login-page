@@ -271,6 +271,6 @@ function loggedInUserCheck() {
 
         loggedInEmail.value = cred[0];
         loggedInUsername.value = cred[1];
-        loggedInPassword.value = cred[3];
+        loggedInPassword.value = cred[2];
     }
 }
