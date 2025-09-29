@@ -27,14 +27,7 @@ function ugrasRegister() {
 }
 
 function vissza() {
-    let registerOldal = document.getElementById("registerOldal");
-    let loginOldal = document.getElementById("loginOldal");
-
-    if (!(registerOldal.classList.contains("d-none"))) {
-        registerOldal.classList.add("d-none")
-    }
-
-    loginOldal.classList.remove("d-none")
+    location.reload();
 }
 
 function register() {
@@ -247,6 +240,8 @@ function login() {
             emailjelszoegyezes.classList.remove("d-none");
         }
     }
+
+    //Ha nincs users object localstorageban valami szöveg
 }
 
 function logout() {
