@@ -241,7 +241,8 @@ function login() {
         }
     }
 
-    //Ha nincs users object localstorageban valami szöveg
+    //Ha nincs users object localstorageban valami szoveg
+    //Jelszo megerosites real time check
 }
 
 function logout() {
