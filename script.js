@@ -243,6 +243,7 @@ function login() {
 
     //Ha nincs users object localstorageban valami szoveg
     //Jelszo megerosites real time check
+    //Ikonok double check
 }
 
 function logout() {
