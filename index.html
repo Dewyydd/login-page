@@ -125,7 +125,7 @@
                                                     d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791" />
                                             </svg></span>
                                         <input type="email" class="form-control text-tertiary" placeholder="Email"
-                                            id="emailCim" required>
+                                            id="emailCim" required oninput="checkEmail()">
                                     </div>
                                     <div id="emailError" class="alert alert-danger d-none">
                                         Nem megfelelő email cím (Pl: almafa1212@gmail.com)
@@ -146,7 +146,7 @@
                                             </svg>
                                         </span>
                                         <input type="text" class="form-control text-tertiary" id="felhasznaloNev"
-                                            placeholder="Felhasználónév" required>
+                                            placeholder="Felhasználónév" required oninput="checkUsername()">
                                     </div>
                                     <div id="usernameError" class="alert alert-danger d-none">
                                         A felhasználónév csak betűket és számokat tartalmazhat, valamint 3-nál több,
@@ -194,7 +194,7 @@
                                         <input type="password" id="passwordMegerosites"
                                             class="form-control text-tertiary" placeholder="Jelszó" required
                                             spellcheck="false" autocorrect="off" autocapitalize="off"
-                                            oninput="checkPassword()">
+                                            oninput="checkPassMatch()">
                                     </div>
                                     <div id="passwordMegerositesLeiras" class="alert alert-danger d-none">
                                         A megadott jelszavak nem egyeznek.
@@ -203,6 +203,9 @@
                                 <div class="progress mb-3" role="progressbar" aria-label="Basic example"
                                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                     <div class="progress-bar" style="width: 0%" id="progress1"></div>
+                                </div>
+                                <div id="notValidRegister" class="alert alert-danger d-none">
+                                    Kérem adjon meg minden adatot!
                                 </div>
                                 <div class="container-fluid navbar">
                                     <div>
@@ -244,8 +247,8 @@
                                                     d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791" />
                                             </svg>
                                         </span>
-                                        <input type="email" class="form-control" placeholder="Email/Felhasználó név" id="loginEmail"
-                                            required>
+                                        <input type="email" class="form-control" placeholder="Email/Felhasználó név"
+                                            id="loginEmail" required>
                                     </div>
                                 </div>
                                 <div class="mb-3">

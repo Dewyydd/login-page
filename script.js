@@ -30,102 +30,8 @@ function vissza() {
     location.reload();
 }
 
-function register() {
-    let emailcim = document.getElementById("emailCim").value;
-    let emailcheck = document.getElementById("emailError");
-    let valid = true;
-
-    let foglaltEmail = document.getElementById("emailFoglalt");
-    let foglaltUsername = document.getElementById("usernameFoglalt");
-
-    if (!(foglaltEmail.classList.contains("d-none"))) {
-        foglaltEmail.classList.add("d-none");
-    }
-
-    if (!(foglaltUsername.classList.contains("d-none"))) {
-        foglaltUsername.classList.add("d-none");
-    }
-
-    if (!(emailcim.match(/^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,3}$/))) {
-        emailcheck.classList.remove("d-none");
-        valid = false;
-    } else {
-        if (!(emailcheck.classList.contains("d-none"))) {
-            emailcheck.classList.add("d-none");
-        }
-    }
-
-    let username = document.getElementById("felhasznaloNev").value;
-    let usernameCheck = document.getElementById("usernameError");
-
-    if (username.length > 30 || username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
-        usernameCheck.classList.remove("d-none");
-        valid = false;
-    }
-
-    else {
-        if (!(usernameCheck.classList.contains("d-none"))) {
-            usernameCheck.classList.add("d-none");
-        }
-    }
-
-    let egyezes = document.getElementById("passwordMegerosites").value;
-    let jelszo = document.getElementById("password").value;
-    let passwordMegerositesLeiras = document.getElementById("passwordMegerositesLeiras");
-
-    if (egyezes === jelszo && jelszo.length >= 8) {
-        passwordMegerositesLeiras.classList.add("d-none");
-        if (!(passwordMegerositesLeiras.classList.contains("d-none"))) {
-            passwordMegerositesLeiras.classList.add("d-none");
-        }
-    } else {
-        passwordMegerositesLeiras.classList.remove("d-none");
-        valid = false;
-    }
-
-    let helyesJ = 0;
-
-    if (/[a-z]/.test(egyezes)) {
-        helyesJ++;
-    }
-
-    if (/[A-Z]/.test(egyezes)) {
-        helyesJ++;
-    }
-
-    if (/[0-9]/.test(egyezes)) {
-        helyesJ++;
-    }
-
-    if (/[._%+!~$]/.test(egyezes)) {
-        helyesJ++;
-    }
-
-    if (egyezes.length >= 8) {
-        helyesJ++;
-    }
-
-    if (helyesJ != 5) {
-        valid = false;
-    }
-
-    if (valid) {
-        if (localStorageRegisterCheck(username, emailcim, jelszo) === "BEmail") {
-            foglaltEmail.classList.remove("d-none")
-        }
-
-        else if (localStorageRegisterCheck(username, emailcim, jelszo) === "BFhsz") {
-            foglaltUsername.classList.remove("d-none")
-        }
-
-        else {
-            alert("Sikeres regisztráció!")
-            location.reload();
-        }
-    }
-}
-
 function checkPassword() {
+
     let jelszo = document.getElementById("password").value;
     let progressbar = document.getElementById("progress1");
     let helyesJ = 0;
@@ -190,6 +96,130 @@ function checkPassword() {
     }
 }
 
+function checkPassMatch() {
+    let egyezes = document.getElementById("passwordMegerosites").value;
+    let jelszo = document.getElementById("password").value;
+    let passwordMegerositesLeiras = document.getElementById("passwordMegerositesLeiras");
+
+    if (!(passwordMegerositesLeiras.classList.contains("d-none"))) {
+        passwordMegerositesLeiras.classList.add("d-none");
+    }
+
+    if (egyezes != jelszo) {
+        passwordMegerositesLeiras.classList.remove("d-none");
+    }
+}
+
+function checkUsername() {
+    let username = document.getElementById("felhasznaloNev").value;
+    let usernameCheck = document.getElementById("usernameError");
+
+    if (!(usernameCheck.classList.contains("d-none"))) {
+        usernameCheck.classList.add("d-none");
+    }
+
+    if (username.length > 30 || username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
+        usernameCheck.classList.remove("d-none");
+    }
+}
+
+function checkEmail() {
+    let emailcim = document.getElementById("emailCim").value;
+    let emailcheck = document.getElementById("emailError");
+
+    if (!(emailcheck.classList.contains("d-none"))) {
+        emailcheck.classList.add("d-none");
+    }
+
+    if (!(emailcim.match(/^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,3}$/))) {
+        emailcheck.classList.remove("d-none");
+    }
+
+}
+
+function register() {
+    let emailcim = document.getElementById("emailCim").value;
+    let valid = true;
+
+    let foglaltEmail = document.getElementById("emailFoglalt");
+    let foglaltUsername = document.getElementById("usernameFoglalt");
+
+    let notValidRegister = document.getElementById("notValidRegister");
+
+    if (!(notValidRegister.classList.contains("d-none"))) {
+        notValidRegister.classList.add("d-none");
+    }
+
+    if (!(foglaltEmail.classList.contains("d-none"))) {
+        foglaltEmail.classList.add("d-none");
+    }
+
+    if (!(foglaltUsername.classList.contains("d-none"))) {
+        foglaltUsername.classList.add("d-none");
+    }
+
+    if (!(emailcim.match(/^[a-zA-Z0-9._]+@[a-zA-Z0-9.]+\.[a-zA-Z]{2,3}$/))) {
+        valid = false;
+    }
+
+    let username = document.getElementById("felhasznaloNev").value;
+
+    if (username.length > 30 || username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
+        valid = false;
+    }
+
+    let egyezes = document.getElementById("passwordMegerosites").value;
+    let jelszo = document.getElementById("password").value;
+
+    if (egyezes != jelszo) {
+        valid = false;
+    }
+
+    let helyesJ = 0;
+
+    if (/[a-z]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (/[A-Z]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (/[0-9]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (/[._%+!~$]/.test(egyezes)) {
+        helyesJ++;
+    }
+
+    if (egyezes.length >= 8) {
+        helyesJ++;
+    }
+
+    if (helyesJ != 5) {
+        valid = false;
+    }
+
+    if (valid) {
+        if (localStorageRegisterCheck(username, emailcim, jelszo) === "BEmail") {
+            foglaltEmail.classList.remove("d-none")
+        }
+
+        else if (localStorageRegisterCheck(username, emailcim, jelszo) === "BFhsz") {
+            foglaltUsername.classList.remove("d-none")
+        }
+
+        else {
+            alert("Sikeres regisztráció!")
+            location.reload();
+        }
+    }
+
+    else {
+        notValidRegister.classList.remove("d-none")
+    }
+}
 
 function localStorageRegisterCheck(fhsznev, email, jelszo) {
     const userKey = email + ";" + fhsznev;
@@ -199,12 +229,12 @@ function localStorageRegisterCheck(fhsznev, email, jelszo) {
         let mentettEmail = k.split(';')[0];
         let mentettFhsz = k.split(';')[1];
 
-        if (mentettEmail === email) {
+        if (mentettEmail.toLowerCase() === email.toLowerCase()) {
             return "BEmail"
             break;
         }
 
-        if (mentettFhsz === fhsznev) {
+        if (mentettFhsz.toLowerCase() === fhsznev.toLowerCase()) {
             return "BFhsz"
             break;
         }
@@ -240,10 +270,6 @@ function login() {
             emailjelszoegyezes.classList.remove("d-none");
         }
     }
-
-    //Ha nincs users object localstorageban valami szoveg
-    //Jelszo megerosites real time check
-    //Ikonok double check
 }
 
 function logout() {
@@ -253,12 +279,12 @@ function logout() {
 
 function loggedInUserCheck() {
     const LIU = localStorage.getItem("loggedInUser");
-    const loginOldal = document.getElementById("loginOldal"); 
+    const loginOldal = document.getElementById("loginOldal");
     const loggedInOldal = document.getElementById("loggedInOldal");
 
-    let loggedInEmail = document.getElementById("loggedInEmail"); 
-    let loggedInUsername = document.getElementById("loggedInUsername"); 
-    let loggedInPassword = document.getElementById("loggedInPassword"); 
+    let loggedInEmail = document.getElementById("loggedInEmail");
+    let loggedInUsername = document.getElementById("loggedInUsername");
+    let loggedInPassword = document.getElementById("loggedInPassword");
 
     if (LIU != null) {
         loggedInOldal.classList.remove("d-none")
@@ -271,3 +297,6 @@ function loggedInUserCheck() {
         loggedInPassword.value = cred[2];
     }
 }
+
+//Ha nincs users object localstorageban valami szoveg
+//Ikonok double check
