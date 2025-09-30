@@ -163,6 +163,7 @@ function register() {
     }
 
     let username = document.getElementById("felhasznaloNev").value;
+    console.log(username)
 
     if (username.length > 30 || username.length < 3 || !/^[a-zA-Z0-9]+$/.test(username)) {
         valid = false;
@@ -216,7 +217,7 @@ function register() {
         }
     }
 
-    else {
+    if (emailcim === "" || jelszo === "" || egyezes === "" || username === "") {
         notValidRegister.classList.remove("d-none")
     }
 }
