@@ -302,3 +302,4 @@ function loggedInUserCheck() {
 
 //Ha nincs users object localstorageban valami szoveg
 //Ikonok double check
+//Save theme locally
