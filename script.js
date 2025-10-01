@@ -265,6 +265,7 @@ function login() {
             let cred = mentettEmail + ";" + mentettFhsz + ";" + jelszo;
             localStorage.setItem("loggedInUser", cred);
             location.reload();
+            break;
         }
 
         else {
