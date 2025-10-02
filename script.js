@@ -8,10 +8,37 @@ function changeTheme() {
         html.setAttribute("data-bs-theme", 'dark');
         darkthemeIcon.classList.add("d-none");
         lightthemeIcon.classList.remove("d-none");
+        localStorage.setItem("theme", "dark");
     } else if (th === "dark") {
         html.setAttribute("data-bs-theme", 'light');
         lightthemeIcon.classList.add("d-none");
         darkthemeIcon.classList.remove("d-none");
+        localStorage.setItem("theme", "light");
+    }
+}
+
+function loadTheme() {
+    let theme = localStorage.getItem("theme");
+    const html = document.documentElement;
+    let th = html.getAttribute("data-bs-theme");
+    let darkthemeIcon = document.getElementById("darkthemeIcon");
+    let lightthemeIcon = document.getElementById("lightthemeIcon");
+
+    if (theme == null) {
+        localStorage.setItem("theme", "light")
+    }
+
+    else if (theme == "light") {
+        html.setAttribute("data-bs-theme", 'light');
+        lightthemeIcon.classList.add("d-none");
+        darkthemeIcon.classList.remove("d-none");
+    }
+
+    else if (theme == "dark") {
+        html.setAttribute("data-bs-theme", 'dark');
+        darkthemeIcon.classList.add("d-none");
+        lightthemeIcon.classList.remove("d-none");
+
     }
 }
 
@@ -254,7 +281,7 @@ function login() {
         emailjelszoegyezes.classList.add("d-none");
     }
 
-    const users = JSON.parse(localStorage.getItem('users'));
+    const users = JSON.parse(localStorage.getItem('users') ||'{}');
 
     for (const k in users) {
         let mentettEmail = k.split(';')[0];
@@ -299,7 +326,3 @@ function loggedInUserCheck() {
         loggedInPassword.value = cred[2];
     }
 }
-
-//Ha nincs users object localstorageban valami szoveg
-//Ikonok double check
-//Save theme locally
