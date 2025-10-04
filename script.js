@@ -1,44 +1,60 @@
-function changeTheme() {
+function darkTheme() {
     const html = document.documentElement;
-    let th = html.getAttribute("data-bs-theme");
     let darkthemeIcon = document.getElementById("darkthemeIcon");
     let lightthemeIcon = document.getElementById("lightthemeIcon");
 
+    html.setAttribute("data-bs-theme", 'dark');
+    darkthemeIcon.classList.add("d-none");
+    lightthemeIcon.classList.remove("d-none");
+
+    let cards = document.getElementsByClassName("card");
+
+    for (let c of cards) {
+        c.style.boxShadow = "0px 0px 2px rgba(222, 226, 230, 0.02), 0px 0px 8px rgba(222, 226, 230, 0.04), 0px 0px 19px rgba(222, 226, 230, 0.06),0px 0px 34px rgba(222, 226, 230, 0.08),0px 0px 53px rgba(222, 226, 230, 0.1)";
+    }
+}
+
+function lightTheme() {
+    const html = document.documentElement;
+    let darkthemeIcon = document.getElementById("darkthemeIcon");
+    let lightthemeIcon = document.getElementById("lightthemeIcon");
+
+    html.setAttribute("data-bs-theme", 'light');
+    lightthemeIcon.classList.add("d-none");
+    darkthemeIcon.classList.remove("d-none");
+
+    let cards = document.getElementsByClassName("card");
+
+    for (let c of cards) {
+        c.style.boxShadow = "0px 0px 2px rgba(3, 7, 18, 0.02), 0px 0px 8px rgba(3, 7, 18, 0.04), 0px 0px 19px rgba(3, 7, 18, 0.06),0px 0px 34px rgba(3, 7, 18, 0.08),0px 0px 53px rgba(3, 7, 18, 0.10)";
+    }
+}
+
+function changeTheme() {
+    let th = document.documentElement.getAttribute("data-bs-theme");
+
     if (th === "light") {
-        html.setAttribute("data-bs-theme", 'dark');
-        darkthemeIcon.classList.add("d-none");
-        lightthemeIcon.classList.remove("d-none");
+        darkTheme()
         localStorage.setItem("theme", "dark");
     } else if (th === "dark") {
-        html.setAttribute("data-bs-theme", 'light');
-        lightthemeIcon.classList.add("d-none");
-        darkthemeIcon.classList.remove("d-none");
+        lightTheme()
         localStorage.setItem("theme", "light");
     }
 }
 
 function loadTheme() {
     let theme = localStorage.getItem("theme");
-    const html = document.documentElement;
-    let th = html.getAttribute("data-bs-theme");
-    let darkthemeIcon = document.getElementById("darkthemeIcon");
-    let lightthemeIcon = document.getElementById("lightthemeIcon");
 
     if (theme == null) {
         localStorage.setItem("theme", "light")
     }
 
     else if (theme == "light") {
-        html.setAttribute("data-bs-theme", 'light');
-        lightthemeIcon.classList.add("d-none");
-        darkthemeIcon.classList.remove("d-none");
+        lightTheme()
     }
 
     else if (theme == "dark") {
-        html.setAttribute("data-bs-theme", 'dark');
-        darkthemeIcon.classList.add("d-none");
-        lightthemeIcon.classList.remove("d-none");
-
+        darkTheme()
     }
 }
 
@@ -281,7 +297,7 @@ function login() {
         emailjelszoegyezes.classList.add("d-none");
     }
 
-    const users = JSON.parse(localStorage.getItem('users') ||'{}');
+    const users = JSON.parse(localStorage.getItem('users') || '{}');
 
     for (const k in users) {
         let mentettEmail = k.split(';')[0];
