@@ -6,11 +6,11 @@ function darkTheme() {
     html.setAttribute("data-bs-theme", 'dark');
     darkthemeIcon.classList.add("d-none");
     lightthemeIcon.classList.remove("d-none");
-
+    
     let cards = document.getElementsByClassName("card");
 
     for (let c of cards) {
-        c.style.boxShadow = "0px 0px 2px rgba(222, 226, 230, 0.02), 0px 0px 8px rgba(222, 226, 230, 0.04), 0px 0px 19px rgba(222, 226, 230, 0.06),0px 0px 34px rgba(222, 226, 230, 0.08),0px 0px 53px rgba(222, 226, 230, 0.1)";
+        c.style.boxShadow = "0px 0px 2px rgba(3, 7, 18, 0.02), 0px 0px 8px rgba(3, 7, 18, 0.04), 0px 0px 19px rgba(3, 7, 18, 0.06),0px 0px 34px rgba(3, 7, 18, 0.08),0px 0px 53px rgba(3, 7, 18, 0.10)";
     }
 }
 
