@@ -13,13 +13,9 @@
 </head>
 
 <style>
-    body {
-        font-family: 'Montserrat', 'Segoe UI';
-        height: 100vh;
-    }
-
     [data-bs-theme="light"] body {
         background: linear-gradient(135deg, #ffffff, #fffcfc);
+        background-size: fixed;
     }
 
     [data-bs-theme="light"] .card {
@@ -28,6 +24,7 @@
 
     [data-bs-theme="dark"] body {
         background: linear-gradient(135deg, #222224, #151718);
+        background-size: fixed;
     }
 
     [data-bs-theme="dark"] .card {
@@ -45,7 +42,7 @@
             0px 0px 34px rgba(3, 7, 18, 0.08),
             0px 0px 53px rgba(3, 7, 18, 0.10);
     }
-    
+
     .btn-primary:hover {
         box-shadow:
             0px 0px 1px rgba(3, 7, 18, 0.02),
@@ -55,11 +52,33 @@
             0px 0px 16px rgba(3, 7, 18, 0.10);
 
     }
+
+    html,
+    body {
+        height: auto;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    body {
+        font-family: 'Montserrat', 'Segoe UI';
+    }
+
+    nav {
+        flex-shrink: 0;
+    }
+
+    main {
+        flex-grow: 1;
+        padding-top: 2.5%;
+        padding-bottom: 2.5%;
+    }
 </style>
 
 <body onload="loggedInUserCheck() 
     loadTheme()">
-    <nav class="navbar mb-5" style="min-height: 8%;">
+    <nav class="navbar">
         <div class="container-fluid">
             <button class="btn btn-lg d-inline-flex justify-content-center align-items-center" onclick="changeTheme()"
                 id="themebutton">
@@ -79,10 +98,10 @@
         </div>
     </nav>
 
-    <main style="min-height: 60%;" class="d-flex align-items-center justify-content-center mb-3">
+    <main class="d-flex justify-content-center align-items-center">
         <div class="container-fluid d-none" id="loggedInOldal">
             <div class="row justify-content-center">
-                <div class="col-xl-4 col-sm-8 col-12">
+                <div class="col-xl-4 col-lg-6 col-sm-8 col-12">
                     <div class="card">
                         <h5 class="card-header bg-transparent" style="border: none;">Felhasználó adatai</h5>
                         <div class="card-body">
@@ -145,7 +164,7 @@
 
         <div class="container-fluid d-none" id="registerOldal">
             <div class="row justify-content-center">
-                <div class="col-xl-4 col-sm-8 col-12">
+                <div class="col-xl-4 col-lg-6 col-sm-8 col-12">
                     <div class="card" style="border: none;padding: 0.5%;">
                         <h5 class="card-header bg-transparent" style="border: none;">Regisztráció</h5>
                         <div class="card-body">
@@ -264,7 +283,7 @@
 
         <div class="container-fluid" id="loginOldal">
             <div class="row justify-content-center">
-                <div class="col-xl-4 col-sm-8 col-12">
+                <div class="col-xl-4 col-lg-6 col-sm-8 col-12">
                     <div class="card" style="border: none;padding: 0.5%;">
                         <h5 class="card-header bg-transparent" style="border: none;">Bejelentkezés</h5>
                         <div class="card-body">
